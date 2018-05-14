@@ -1,0 +1,25 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/login/index",
+    "pages/welcome/index",
+    "pages/bindcard/index",
+    "pages/bindconfirm/index",
+    "pages/bindsuccess/index",
+    "pages/charge/index",
+    "pages/chargeconfirm/index",
+    "pages/chargesuccess/index",
+    "pages/chargefail/index",
+    "pages/coupon/index",
+    "pages/tradelist/index",
+    "pages/card/index",
+    "pages/account/index",
+    "pages/view_state/index"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "克莉丝汀",
+    "navigationBarTextStyle":"black"
+  }
+}

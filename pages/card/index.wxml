@@ -1,0 +1,57 @@
+<view class="container">
+    <view class="flexbox topbar">
+		<view bindtap="openCard" data-param="1" class="flex-item {{cardType==1?'active':''}}">电子卡账户</view>
+		<view bindtap="openCard" data-param="2" class="flex-item {{cardType==2?'active':''}}  bar2">实体卡账户{{entityCards.length?'('+entityCards.length+')':''}}</view>
+	</view>
+
+    <view wx:if="{{cardType==1}}">
+		<view class="swiper">
+			<image class="bg" src="../../image/cardbg.jpg" />
+			<view class="Oneslide">
+		    	<image src="../../image/card1.jpg" />
+		    	<view class="cardNo">{{eCard.cardNo}}</view>
+			</view>
+		</view>
+	    <view class="text">账户余额</view>
+		<view class="val">{{eCard.bala}}</view>
+		<view class="flexbox btnGroup">
+			<view class="flex-item btn" bindtap="openCharge">账户充值</view>
+			<view class="flex-item btn" bindtap="openTrade">消费明细</view>
+		</view>
+		<image class="scanIcon" src="../../image/scan.png" />
+    </view>
+
+
+    <view wx:if="{{cardType==2}}">
+    	<view wx:if="{{entityCards.length != 0}}">
+			<view class="swiper">
+				<image class="bg" src="../../image/cardbg.jpg" />
+				<view class="swiperCon">
+					<view class="swiperGroup" animation="{{animationData}}" style="width:{{entityCards.length*560}}rpx">
+					    <view class="slide" wx:key="{{index}}" wx:for="{{entityCards}}">
+					    	<image src="../../image/card1.jpg" />
+					    	<view class="cardNo">{{item.cardNo}}</view>
+					    </view>
+					</view>
+				</view>
+				<view class="pagination">
+				     <image wx:key="{{index}}" wx:for="{{entityCards}}" class="flag" src="{{page==index?'../../image/choosed.png':'../../image/choose.png'}}" />
+				</view>
+				<image bindtap="prevClick" class="prev" src="../../image/prev.png" />
+		    	<image bindtap="nextClick" class="next" src="../../image/next.png" />
+			</view>
+			<view class="text">账户余额</view>
+			<view class="val">{{eCard.bala}}</view>
+			<view class="flexbox btnGroup">
+				<view class="flex-item btn" bindtap="openTrade">消费明细</view>
+			</view>
+			<image class="scanIcon" src="../../image/scan.png" />
+		</view>
+		<view class="empty" wx:if="{{entityCards == 0}}">
+			<image src="../../image/empty.png" />
+		    暂无实体卡，点击右下角图标去添加
+	    </view>
+		<image bindtap="TobindCard" class="addIcon" src="../../image/add.png" />
+    </view>
+
+</view>

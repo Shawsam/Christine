@@ -1,0 +1,25 @@
+page{ background:#FFF5DD; }
+.container{  height:100%; overflow-y:scroll; -webkit-overflow-scrolling:touch; box-sizing:border-box; position:relative;}
+.container .qrcodeCon{ background:#fff; color:#333; width:88%; margin:40rpx auto 30rpx auto; padding-bottom:50rpx; border-radius:20rpx; text-align:center; box-shadow:3rpx 3rpx 6rpx rgba(0,0,0,0.1); }
+.container .qrcodeCon .title{ border-bottom:1px dashed #951D3E; padding:20rpx 0; font-size:30rpx;}
+.container .qrcodeCon .title .num{ color:#951D3E; font-size:32rpx; }
+.container .qrcodeCon .code{ height:320rpx; width:320rpx; margin:30rpx 0; }
+.container .qrcodeCon .tip{ color:#999; }
+.container .qrcodeCon .balance{ margin-top:15rpx; font-size:32rpx; }
+.container .qrcodeCon .balance .val{ color:#951D3E; font-size:34rpx;}
+/*.container .swiper{ height:360rpx; position:relative;}
+.container .swiper .slide{ height:340rpx; width:540rpx; border-radius:15rpx; position:absolute; top:50%; left:50%; margin-left:-270rpx; margin-top:-170rpx; }
+.container .swiper .next{ height:40rpx; width:40rpx; position:absolute; right:50rpx; top:50%; margin-top:-20rpx; }
+.container .swiper .prev{ height:40rpx; width:40rpx; position:absolute; left:50rpx; top:50%; margin-top:-20rpx; }
+.container .page{ text-align:center; color:#951D3E; font-size:32rpx; border-radius:10rpx; border:1px solid #951D3E; width:150rpx; margin:25rpx auto 0 auto; line-height:50rpx;}
+*/
+.container .swiper { height:360rpx; position:relative; }
+.container .swiper .bg{ height:100%; width:100% }
+.container .swiper .swiperCon{height:340rpx; width:540rpx; border-radius:15rpx; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); overflow:hidden;}
+.container .swiper .swiperGroup{ height:340rpx; }
+.container .swiper .swiperGroup .slide{ height:340rpx; width:540rpx; float:left; position:relative;}
+.container .swiper .swiperGroup .slide image{ height:340rpx; width:540rpx;}
+.container .swiper .swiperGroup .slide .cardNo{ font-size:32rpx; position:absolute; bottom:80rpx; right:50rpx; }
+.container .swiper .next{ height:40rpx; width:40rpx; position:absolute; right:35rpx; top:50%; margin-top:-20rpx; }
+.container .swiper .prev{ height:40rpx; width:40rpx; position:absolute; left:35rpx; top:50%; margin-top:-20rpx; }
+.container .page{ text-align:center; color:#951D3E; font-size:32rpx; border-radius:10rpx; border:1px solid #951D3E; width:150rpx; margin:25rpx auto 0 auto; line-height:50rpx;}

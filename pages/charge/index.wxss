@@ -1,0 +1,16 @@
+page{ background:#FFF5DD; }
+.container{  height:100%; overflow-y:scroll; -webkit-overflow-scrolling:touch; box-sizing:border-box; position:relative;}
+.container .main{ padding:40rpx 60rpx; }
+.container .main view.chargeVal{ box-shadow:3rpx 3rpx 6rpx rgba(0,0,0,0.1); position:relative; padding:15rpx 0; padding-left:150rpx; background:#fff; border-radius:15rpx;}
+.container .main view.chargeVal label{ position:absolute; height:60rpx; line-height:60rpx; left:0; top:15rpx; display:inline-block; width:150rpx; text-align:center;}
+.container .main view.chargeVal view{ height:60rpx; line-height:60rpx; border-left:1px solid #f0f0f0; padding:0 20rpx 0 80rpx;}
+.container .main .flexbox{ margin:0 -20rpx; margin-top:40rpx; }
+.container .main .item{ border-radius:15rpx; background:#fff; line-height:60rpx; text-align:center; margin:0 20rpx; padding:15rpx 0; box-shadow:3rpx 3rpx 6rpx rgba(0,0,0,0.1);}
+.container .main .item.active{ box-shadow:0rpx 0rpx 6rpx 3rpx rgba(149,29,62,0.9); }
+.container .main .item input{ height:60rpx; line-height:60rpx; }
+.container .chargeBtn{ background:#951D3E; color:#fff; text-align:center; border-radius:10rpx; height:80rpx; line-height:80rpx; font-size:30rpx; margin:120rpx auto; }
+
+.container .bottom{ position:absolute; bottom:40rpx; display:block; width:100%; }
+.container .bottom image{ width:302rpx; height:140rpx; margin:0 auto; display:block;}
+.container .bottom .page{ margin:0 auto; display:block; width:160rpx; }
+.container .bottom .page image{ width:40rpx; height:40rpx; display:inline-block; }

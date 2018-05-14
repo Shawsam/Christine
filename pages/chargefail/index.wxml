@@ -1,0 +1,14 @@
+<view class="container">
+    <view class="main">
+        <image class="icon" src="../../image/failCharge.png" />
+        <view class="title">充值失败</view>
+
+        <view class="note">遇到不明原因及，本次充值失败</view>
+        <view class="text">可能技术人员被外星人抓走了</view>
+        <view class="note">不要气馁，<span  bindtap="backTap" class="recharge">重新充值</span></view>
+
+        <view class="tip">如果遇到问题或有疑问可致电</view>
+        <view class="phone">400 820 5000</view>
+        <view bindtap="backTap" class="btn backBtn">返回</view>
+    </view>
+</view>

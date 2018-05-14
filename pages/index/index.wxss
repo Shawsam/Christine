@@ -1,0 +1,34 @@
+page{ background:#f8f8f8; }
+.container{  height:100%; overflow-y:scroll; -webkit-overflow-scrolling:touch; box-sizing:border-box; position:relative;}
+
+.container .topCon{ position:relative; height:400rpx; overflow:hidden; }
+.container .topCon .bg{ width:100%; height:100%; position:absolute;  }
+.container .topCon .shade{ width:100%; height:100%; position:absolute; background:rgba(0,0,0,0.3) }
+.container .topCon .flex-item{ position:static; z-index:100;}
+.container .topCon .flex-item view{ text-align:center; color:#fff; }
+.container .topCon .flex-item .val{ font-size:38rpx; margin-bottom:5rpx;}
+.container .topCon .balance{ padding-top:150rpx; }
+.container .topCon .itemIcon{ height:32rpx; width:32rpx; margin-right:6rpx; vertical-align:middle; margin-top:-2rpx; }
+.container .topCon .consum{ padding-top:150rpx; }
+.container .topCon .consum .text{ color:#E9C56E; }
+.container .topCon .info .grade{ color:#f3cc6f; font-size:28rpx;}
+.container .topCon .info .grade .val{ color:#E9C56E; font-size:28rpx; }
+
+.container .topCon .info .name{ font-size:34rpx; display:inline-block; width:100%; height:40rpx; overflow:hidden; white-space:nowrap; text-overflow:ellipsis }
+.container .topCon .info .avatar{ height:220rpx; width:220rpx; border-radius:100%; border:4rpx solid #fff; display:block; margin:60rpx auto 20rpx auto; }
+.container .menu{ margin:25rpx 0; padding:20rpx 0; background:#fff; }
+.container .menu .item{ position:relative; }
+.container .menu .item image{ height:140rpx; width:140rpx; display:block; margin:0 auto; }
+.container .menu .item image:active{ transform:scale(1.05); }
+.container .menu .item view{ text-align:center; display:block;}
+.container .menu .item text{ position:absolute; top:5rpx; right:40rpx; background:#f3cc6f; color:#951D3E; border-radius:100%; display:inline-block; width:30rpx; height:30rpx; text-align:center; line-height:30rpx;}
+.container .recommend{ background:#fff; }
+.container .recommend .title{ text-align:center; border-bottom:1px solid #e8e8e8}
+.container .recommend .title text{ margin:0 10rpx; height:80rpx; line-height:80rpx; }
+.container .recommend .list{ padding:1rpx 30rpx; }
+.container .recommend .list .item{ position:relative; margin:30rpx 0; overflow:hidden;}
+.container .recommend .list .item > image{ width:100%; height:360rpx; border-radius:15rpx;}
+.container .recommend .list .item .desp{ color:#fff; border-radius:0 0 15rpx 15rpx; font-size:30rpx; height:80rpx; line-height:80rpx; position:absolute; bottom:10rpx; left:0;  width:100%; background:rgba(0,0,0,0.2) }
+.container .recommend .list .item .desp text{ padding:0 30rpx; }
+
+.button{ width:300rpx; margin:50rpx auto; font-size:30rpx;  }

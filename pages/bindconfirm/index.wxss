@@ -1,0 +1,12 @@
+page{ background:#FFF5DD; }
+.container{  height:100%; overflow-y:scroll; -webkit-overflow-scrolling:touch; box-sizing:border-box; position:relative;}
+.container .top{ width:100%; height:630rpx; position:relative; }
+.container .head{ width:100%; height:630rpx; position:absolute; }
+.container .card1{ width:580rpx; height:370rpx; position:absolute; top:0; left:50%; margin-left:-290rpx; top:100rpx; border-radius:15rpx;}
+.container .info{ margin:50rpx 0; font-size:30rpx;}
+.container .info view.item{ margin:10rpx 0; color:#951D3E;}
+.container .info view.item view{ width:200rpx; margin:0 auto; position:relative; padding-left:200rpx; }
+.container .info view.item view label{ color:#000; display:inline-block; width:200rpx; text-align:right; position:absolute; left:0 }
+.container view.approve{ color:#951D3E; text-align:center; margin:60rpx 0; position:relative; }
+.container view.approve image.flag{ width:40rpx; height:40rpx; display:inline-block; vertical-align:middle; margin-top:-5rpx; }
+.container .completeBtn{ background:#951D3E; color:#fff; text-align:center; border-radius:10rpx; height:70rpx; line-height:70rpx; font-size:30rpx; width:300rpx; margin:0 auto; }

@@ -1,0 +1,33 @@
+<scroll-view scroll-y="{{!modalState}}" class="container" bindscrolltolower="loadMoreData" bindscrolltoupper="refreshData">
+	<view class="shadow" wx:if="{{modalState}}" bindtap="hideModal"></view>
+	<view class="Modal" wx:if="{{modalState}}">
+		<view class="Modaltitle">现金券使用提示</view>
+		<view class="Modalcontent">
+			<view class="name">{{currentItem.type.typeName}}</view>
+			<view class="time">有效期至{{currentItem.dateString}}</view>
+			<image class="qrcode"  mode="scaleToFill" src="{{imagePath}}" />
+	        <view class="text">
+		        <view class="title">优惠券使用说明</view>
+			    <view>1、优惠券使用说明优惠券使用说明优惠券使用说明优惠券</view>
+		        <view>2、优惠券使用说明优惠券使用说明</view>
+		        <view>3、优惠券使用说明优惠券使用说明优惠</view>
+		    </view>
+		</view>
+	</view>
+	<view class="main">
+       <view class="item" data-param="{{index}}" bindtap="infoScan" wx:for="{{couponData}}" wx:key="{{index}}">
+       	  <image src="../../image/coupon.png" />
+       	  <view class="val">{{item.couponValue}}</view>
+       	  <view class="info">
+       	      <view class="desp">{{item.type.typeName}}</view>
+       	      <view class="datelabel">有效期至：</view>
+       	      <view class="date">{{item.dateString}}</view>
+       	  </view>
+       </view>
+       <view class="noMore" wx:if="{{noMore}}">没有更多数据了</view>
+	</view>
+</scroll-view>
+
+<view class="canvas-box">
+  <canvas  hidden="{{canvasHidden}}" style="width:668rpx;height:668rpx;background:#f1f1f1;margin:0 auto;" canvas-id="mycanvas"/>
+</view>

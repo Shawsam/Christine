@@ -1,0 +1,13 @@
+page{ background:#FFF5DD; }
+.container{  height:100%; overflow-y:scroll; -webkit-overflow-scrolling:touch; box-sizing:border-box; position:relative;}
+.container .main{ padding:80rpx 60rpx; }
+.container .main .icon{ height:260rpx; width:260rpx; display:block; margin:0 auto; }
+.container .backBtn{ background:#951D3E; color:#fff; text-align:center; border-radius:10rpx; height:70rpx; line-height:70rpx; font-size:30rpx; width:280rpx; margin:120rpx auto; }
+.container .main view{ text-align:center; }
+.container .main view.title{ font-size:38rpx; margin:50rpx 0; }
+
+.container .main view.note{ font-size:30rpx; margin-bottom:20rpx; }
+.container .main view.text{ color:#333; margin-bottom:20rpx; }
+.container .main view.note span{ color:#951D3E; text-decoration:underline; }
+.container .main view.tip{ font-size:25rpx; color:#333; margin-top:50rpx;}
+.container .main view.phone{ font-size:30rpx; margin-top:25rpx; color:#951D3E; }

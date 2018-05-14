@@ -1,0 +1,20 @@
+<view class="container">
+	<view class="main">
+		<view class="chargeVal fm"><label>充值金额</label><view>{{inputState?inputVal:currentVal}}</view></view>
+		<view class="flexbox"> 
+          <view bindtap="chooseItem" data-param="100" class="flex-item item {{currentVal=='100'?'active':''}}">100元</view>
+          <view bindtap="chooseItem" data-param="200" class="flex-item item {{currentVal=='200'?'active':''}}">200元</view>
+          <view bindtap="chooseItem" data-param="300" class="flex-item item {{currentVal=='300'?'active':''}}">300元</view>
+        </view>
+        <view class="flexbox">
+          <view bindtap="chooseItem" data-param="500" class="flex-item item {{currentVal=='500'?'active':''}}">500元</view>
+          <view bindtap="inputItem" data-param="{{inputVal}}" class="flex-item item {{inputState?'active':''}}">
+          	<input placeholder="手动输入金额" value="{{inputVal}}" bindinput="valInput" />
+          </view>
+        </view>
+        <view bindtap="chargeTap" class="btn chargeBtn">立即充值</view>
+	</view>
+	<view class="bottom">
+		<image src="../../image/logo.png" />
+	</view>
+</view>

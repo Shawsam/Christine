@@ -1,0 +1,14 @@
+<view class="container">
+    <view class="main">
+        <image class="icon" src="../../image/successCharge.png" />
+        <view class="title">充值成功</view>
+        <view class="time">{{time}}</view>
+
+        <view class="val">本次充值金额<span>{{fee}}</span></view>
+        <view class="note">已实时到账，可前往您的账户中查看</view>
+
+        <view class="tip">如果遇到问题或有疑问可致电</view>
+        <view class="phone">400 820 5000</view>
+        <view bindtap="backTap" class="btn backBtn">返回</view>
+    </view>
+</view>

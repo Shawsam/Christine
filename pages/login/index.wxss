@@ -1,0 +1,39 @@
+@import '../../model/model.wxss'
+
+page{ background:#FFF5DD; }
+.container{  height:100%; overflow-y:scroll; -webkit-overflow-scrolling:touch; box-sizing:border-box; position:relative;}
+.container .main{ padding:100rpx 80rpx; }
+.container .main view.fm{ background:#fff; margin-bottom:30rpx; border-radius:10rpx; padding:15rpx 0; height:60rpx; line-height:60rpx; box-shadow:3rpx 3rpx 6rpx rgba(0,0,0,0.1);}
+.container .main view.fm label{ height:60rpx; line-height:60rpx; display:inline-block;}
+.container .main view.area label{ width:280rpx; padding:0 30rpx;  text-align:right; display:inline-block; }
+.container .main view.area span{ height:60rpx; line-height:60rpx; display:inline-block; border-left:1px solid #f0f0f0; text-indent:30rpx; color:#951D3E;}
+.container .main view.phone{ position:relative; padding-left:100rpx;}
+.container .main view.phone label{ position:absolute; left:0; top:15rpx; display:inline-block; width:100rpx; text-align:center;}
+.container .main view.phone input{ height:60rpx; line-height:60rpx; border-left:1px solid #f0f0f0; padding:0 20rpx;}
+.container .main .btn{ background:#951D3E; color:#fff; text-align:center; border-radius:10rpx; height:80rpx; line-height:80rpx; margin-top:80rpx; font-size:30rpx }
+
+.container .main button{ background:#951D3E; color:#fff; text-align:center; border-radius:10rpx; height:80rpx; line-height:80rpx; margin-top:80rpx; font-size:30rpx }
+
+.container .main view.text{color:#333; text-align:center;}
+.container .main view.tip{ color:#000; margin:10rpx 0; text-align:center; margin-bottom:40rpx; }
+.container .main view.number{ color:#951D3E; font-size:35rpx; margin:15rpx 0; text-align:center; }
+.container .main view.code input{ height:60rpx; line-height:60rpx; padding:0 20rpx; text-align:center;}
+.container .main view.name input{ height:60rpx; line-height:60rpx; padding:0 20rpx; text-align:center;}
+.container .main view.birth input{ height:60rpx; line-height:60rpx; padding:0 20rpx; text-align:center;}
+.container .main view.sex{ margin-bottom:40rpx; }
+.container .main view.referer input{ height:60rpx; line-height:60rpx; padding:0 20rpx; text-align:center;}
+.container .main view.pwd input{ height:60rpx; line-height:60rpx; padding:0 20rpx; text-align:center;}
+.container .main view.area{ text-align:center; color:#666; }
+.container .main view.title{color:#000; text-align:center; font-size:32rpx; margin-bottom:30rpx; }
+.container .main view.sex view{ text-align:center; }
+.container .main view.sex .man{ color:#951D3E; margin-left:30rpx;  height:60rpx; line-height:60rpx; padding:15rpx 20rpx; text-align:center; border-radius:10rpx;  background:#fff; box-shadow:3rpx 3rpx 6rpx rgba(0,0,0,0.1);}
+.container .main view.sex .women{ color:#951D3E; margin-right:30rpx;  height:60rpx; line-height:60rpx; padding:15rpx 20rpx; text-align:center; border-radius:10rpx;  background:#fff; box-shadow:3rpx 3rpx 6rpx rgba(0,0,0,0.1);}
+.container .main view.sex view.active{ border:1rpx solid #951D3E; box-shadow:3rpx 3rpx 6rpx rgba(149,29,62,0.5); }
+.container .main view.approve{ color:#951D3E; text-align:center; margin:60rpx 0 30rpx 0; position:relative; }
+.container .main view.approve image.flag{ width:40rpx; height:40rpx; display:inline-block; vertical-align:middle; margin-top:-5rpx;}
+
+.container .bottom{ display:block; width:100%; margin-bottom:30rpx; }
+.container .bottom image{ width:302rpx; height:140rpx; margin:0 auto; display:block;}
+.container .bottom .page{ margin:0 auto; display:block; width:160rpx; }
+.container .bottom .page image{ width:40rpx; height:40rpx; display:inline-block; }
+.picker{ padding:0 30rpx; text-align:center; color:#666 }

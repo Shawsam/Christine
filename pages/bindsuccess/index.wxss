@@ -1,0 +1,13 @@
+page{ background:#FFF5DD; }
+.container{  height:100%; overflow-y:scroll; -webkit-overflow-scrolling:touch; box-sizing:border-box; position:relative;}
+
+.container .main{ padding:0 60rpx 60rpx 60rpx; text-align:center; color:#333; font-size:28rpx; }
+.container .main .number{ color:#951D3E; margin:0 5rpx; }
+.container .main .top{ width:500rpx; height:424rpx; margin:0 auto; }
+.container .main .card{ width:100%; height:280rpx; margin-top:30rpx; }
+.container .main .tip{ color:#951D3E; font-size:32rpx; margin:20rpx 0;}
+
+.container .btnGroup .btn{ color:#951D3E; font-size:30rpx; height:60rpx; line-height:60rpx; padding:15rpx 20rpx; text-align:center; border-radius:10rpx;  background:#fff; box-shadow:3rpx 3rpx 6rpx rgba(0,0,0,0.1); }
+.container .btnGroup .btn:nth-child(1){ margin:0 30rpx 0 60rpx; }
+.container .btnGroup .btn:nth-child(2){ margin:0 60rpx 0 30rpx; }
+.container .btnGroup .btn.active{ border:1rpx solid #951D3E; box-shadow:3rpx 3rpx 6rpx rgba(149,29,62,0.5); }

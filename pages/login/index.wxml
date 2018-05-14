@@ -1,0 +1,72 @@
+<import src="../../model/model.wxml"/>
+<template is="areaData" data="{{...item}}"/>
+
+<view class="container">
+	<view class="main">
+		<section wx:if="{{step==1}}">
+	        <view class="area fm"><label>国家/地区</label><span>中国</span></view>
+	        <view class="phone fm"><label>+86</label><input type="number" maxlength="11" bindinput="phoneInput" placeholder="请输入中国大陆地区手机号" /></view>
+	        <button class="getCode btn" open-type="getUserInfo" bindgetuserinfo="getCodeFun">登录</button>
+		</section>
+
+		<section wx:if="{{step==2}}">
+	        <view class="text">已发送短信验证码至</view>
+	        <view class="number">+86 {{mobile}}</view>
+	        <view wx:if="{{timer!=0}}" class="tip">({{timer}}秒后重试)</view>
+	        <view wx:if="{{timer==0}}" class="tip"  bindtap="RegetCodeFun">重新发送验证码</view>
+	        <view class="code fm"><input type="number" maxlength="6" bindinput="codeInput" placeholder="请输入收到的短信验证码" /></view>
+	        <view bindtap="yzCodeFun" class="yzCode btn">下一步</view>
+		</section>
+
+		<section wx:if="{{step==3}}">
+	        <view class="title">新会员注册</view>
+	        <view class="name fm"><input bindinput="nameInput" placeholder="亲告诉我你的名字" /></view>
+	        <view class="birth fm">
+	        	<picker mode="date" value="{{date}}" start="1918-01-01" end="2018-05-03" bindchange="bindDateChange">
+	        		<view class="picker">{{date?date:'亲选择你的生日'}}</view>
+	        	</picker>
+	        </view>
+	        <view class="referer fm"><input bindinput="referrerInput" placeholder="亲告诉我推荐人编号" /></view>
+            <view class="sex flexbox">
+            	<view bindtap="chooseSex" data-param="1" class="flex-item women {{sexCode==2?'active':''}}">女生</view>
+            	<view bindtap="chooseSex" data-param="2" class="flex-item man {{sexCode==1?'active':''}}">男生</view>
+            </view>
+<!--        <view class="area fm">
+	        	<picker mode="date" value="{{date}}" start="1918-01-01" end="2018-05-03" bindchange="bindDateChange">
+	        		<view class="picker">{{date?date:'亲选择你的生日'}}</view>
+	        	</picker>
+	        </view> -->
+	        <view class="area fm" bindtap="translate">{{province?province+city+county:'请选择省市区'}}</view>
+            <view class="pwd fm"><input bindinput="pwdInput" placeholder="登录密码" /></view>
+            <view class="approve" bindtap="approveFun">
+            	<image class="flag" src="{{approveFlag?'../../image/choosed.png':'../../image/choose.png'}}" />
+                已阅读《会员手册》并同意条款
+            </view>
+            <view bindtap="completeFun" class="completeBtn btn">下一步</view>
+		</section>
+	</view>
+
+	<view class="bottom">
+		<image src="../../image/logo.png" />
+		<view class="page">
+			<view wx:if="{{step==1}}">
+			    <image src="../../image/choosed.png" />
+				<image src="../../image/choose.png" />
+				<image src="../../image/choose.png" />
+				<image src="../../image/choose.png" />
+			</view>
+			<view wx:if="{{step==2}}">
+				<image src="../../image/choose.png" />
+				<image src="../../image/choosed.png" />
+				<image src="../../image/choose.png" />
+				<image src="../../image/choose.png" />
+			</view>
+			<view wx:if="{{step==3}}">
+				<image src="../../image/choose.png" />
+				<image src="../../image/choose.png" />
+				<image src="../../image/choosed.png" />
+				<image src="../../image/choose.png" />
+			</view>
+		</view>
+	</view>
+</view>

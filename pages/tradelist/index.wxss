@@ -1,0 +1,12 @@
+page{ background:#FFF5DD; }
+.container{  height:100%; overflow-y:scroll; -webkit-overflow-scrolling:touch; box-sizing:border-box; position:relative;}
+.container .item{ padding:20rpx 0; padding-right:160rpx; border-bottom:1px solid #e8e8e8; position:relative; }
+.container .item > view{ display:inline-block; vertical-align:middle; text-align:center; }
+.container .item > view image{ width:100rpx; height:100rpx; border-radius:100%; display:flex; margin:0 20rpx; }
+.container .item > view.timeCon{ width:180rpx; }
+.container .item > view.infoCon{ width:200rpx; text-align:left; margin-left:50rpx;}
+.container .item > view.type{ position:absolute; color:#fff; right:30rpx; top:50rpx; width:100rpx; height:34rpx; line-height:34rpx; background:#B1244B; border-radius:20rpx;  }
+.container .item > view.type.charge{ background:#79BF21 }
+.container .item .addr{ color:#999 }
+.container .item .val{ font-size:32rpx }
+

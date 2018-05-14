@@ -1,0 +1,6 @@
+<view class="container">
+	<view class="flexbox btnGroup">
+		<view class="flex-item btn" bindtap="ToUserCenter">会员中心</view>
+		<view class="flex-item btn" bindtap="ToBindCard">绑定会员卡</view>
+	</view>
+</view>

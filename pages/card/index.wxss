@@ -1,0 +1,33 @@
+page{ background:#FFF5DD; }
+.container{ height:100%; overflow-y:scroll; -webkit-overflow-scrolling:touch; box-sizing:border-box; position:relative; text-align:center; }
+.container .topbar{ background:#951D3E; color:#7A1732; padding:20rpx 0; line-height:50rpx; }
+.container .topbar .bar2{ border-left:1px solid #7A1732; }
+.container .topbar .active{ color:#fff; }
+.container .swiper { height:450rpx; position:relative; }
+.container .swiper .bg{ height:100%; width:100% }
+.container .swiper .Oneslide{ position:relative; height:360rpx; width:560rpx; border-radius:15rpx; overflow:hidden; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);}
+.container .swiper .Oneslide image{ height:360rpx; width:560rpx; }
+.container .swiper .Oneslide .cardNo{ font-size:32rpx; position:absolute; bottom:80rpx; right:50rpx; }
+
+.container .swiper .next{ height:40rpx; width:40rpx; position:absolute; right:35rpx; top:50%; margin-top:-20rpx; }
+.container .swiper .prev{ height:40rpx; width:40rpx; position:absolute; left:35rpx; top:50%; margin-top:-20rpx; }
+.container .swiper .pagination{ position:absolute; bottom:3rpx; left:50%; transform:translateX(-50%); }
+.container .swiper .pagination image{  width:40rpx; height:40rpx; display:inline-block; vertical-align:middle; margin-top:-5rpx; }
+.container .swiper .swiperCon{height:360rpx; width:560rpx; border-radius:15rpx; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); overflow:hidden;}
+.container .swiper .swiperGroup{ height:360rpx; }
+.container .swiper .swiperGroup .slide{ height:360rpx; width:560rpx; float:left; position:relative;}
+.container .swiper .swiperGroup .slide image{ height:360rpx; width:560rpx;}
+.container .swiper .swiperGroup .slide .cardNo{ font-size:32rpx; position:absolute; bottom:80rpx; right:50rpx; }
+
+.container .text{ color:#666; margin-top:40rpx; font-size:30rpx; }
+.container .val{ font-size:40rpx; color:#951D3E; margin-top:10rpx;}
+.container .btnGroup { margin:70rpx 0 40rpx 0; }
+.container .btnGroup .btn{ color:#951D3E; font-size:30rpx; height:60rpx; line-height:60rpx; padding:15rpx 20rpx; text-align:center; border-radius:10rpx;  background:#fff; box-shadow:3rpx 3rpx 6rpx rgba(0,0,0,0.1); }
+.container .btnGroup .btn:nth-child(1){ margin:0 30rpx 0 60rpx; }
+.container .btnGroup .btn:nth-child(2){ margin:0 60rpx 0 30rpx; }
+.container .btnGroup .btn.active{ border:1rpx solid #951D3E; box-shadow:3rpx 3rpx 6rpx rgba(149,29,62,0.5); }
+.container .scanIcon{ height:170rpx; width:170rpx; margin:35rpx 0; }
+.container .addIcon{ position:absolute; height:113rpx; width:120rpx; bottom:0; right:0 }
+
+.container .empty{ padding:50rpx; color:#999 }
+.container .empty image{ height:100rpx; width:100rpx; display:block;margin:15rpx auto; }

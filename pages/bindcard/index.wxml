@@ -1,0 +1,10 @@
+<view class="container">
+   <view class="card">
+   	  <image src="../../image/card.jpg" />
+      <view class="form">
+      	  <view class="cardNo fm"><input bindinput="cardNoInput" placeholder="请输入实物卡卡号" /></view>
+	      <view class="pwd fm"><input bindinput="pwdInput" placeholder="请输入密码" /></view>
+      </view>
+   </view>
+   <view class="btn bindBtn" bindtap="bindFun" >立即绑定</view>
+</view>

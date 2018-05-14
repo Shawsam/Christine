@@ -1,0 +1,56 @@
+<view class="container">
+	<view>
+		<view class="topCon flexbox">
+			<image class="bg" src="../../image/head.jpg" />
+			<view class="shade"></view>
+	        <view class="flex-item balance">
+	        	<view class="val">{{info.bala01}}</view>
+	        	<view><image class="itemIcon" src="../../image/money.png"/>账户余额</view>
+	        </view>
+	        <view class="flex-item info">
+	        	<image class="avatar" src="{{userInfo.avatarUrl}}" />
+	        	<view class="name">{{info.name}}</view>
+	        </view>
+	        <view class="flex-item consum">
+	        	<view class="val">{{info.points}}</view>
+	        	<view class="text"><image class="itemIcon" src="../../image/grade.png"/>当前积分</view>
+	        </view>
+		</view>
+
+		<view class="menu flexbox">
+			<view class="flex-item item" bindtap="openAccount">
+				<image class="icon" src="../../image/menu1.png" />
+				<view>扫一扫</view>
+			</view>
+			<view class="flex-item item" bindtap="openCoupon">
+				<image class="icon" src="../../image/menu2.png" />
+				<view>我的优惠券</view>
+				<text wx:if="{{info.couponCount}}">{{info.couponCount}}</text>
+			</view>
+			<view class="flex-item item" bindtap="openCard">
+				<image class="icon" src="../../image/menu3.png" />
+				<view>我的卡包</view>
+			</view>
+			<view class="flex-item item" bindtap="openCharge">
+				<image class="icon" src="../../image/menu4.png" />
+				<view>账户充值</view>
+			</view>
+		</view>
+
+		<view class="recommend">
+			<view class="title"><text>-</text>热门推荐<text>-</text></view>
+			<view class="list">
+	           <view class="item">
+	           	   <image src="../../image/item1.jpg" />
+	           	   <view class="desp"><text>克莉丝汀外卖平台</text></view>
+	           </view>
+	           <view class="item">
+	           	   <image src="../../image/item2.jpg" />
+	           	   <view class="desp"><text>克莉丝汀礼品卡</text></view>
+	           </view>
+			</view>
+		</view>
+    </view>
+</view>
+
+
