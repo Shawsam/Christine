@@ -1,9 +1,11 @@
 <view class="container">
+    <view class="top">
+      <image class="card1" src="../../image/cardbind.jpg" />
+   </view>
 	<view class="main">
-		<image class="top" src="../../image/head.png" />
 		<view class="tip">卡片绑定成功</view>
-		<view>卡号尾号为<span class="number">1234</span>的卡，已放入您的卡包</view>
-	    <image class="card" src="../../image/item1.jpg" />
+		<view>卡号尾号为<span class="number">{{subcardNo}}</span>的卡，已放入您的卡包</view>
+	    <image class="card" src="{{cardImg}}" />
 	</view>
 	<view class="flexbox btnGroup">
 		<view class="flex-item btn" bindtap="ToCard">前往卡包</view>

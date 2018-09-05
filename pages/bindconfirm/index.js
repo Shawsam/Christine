@@ -4,18 +4,14 @@ const app = getApp()
 
 Page({
   data: {
-    userInfo: null,
-    step:1,
-    sexCode:1,
-    approveFlag:false
+    userInfo: null
   },
-  onLoad: function () {
-
-  },
-  approveFun:function(){
-    this.setData({approveFlag:true})
+  onLoad: function (option) {
+    var cardInfo = JSON.parse(option.cardInfo)
+    this.setData({cardInfo:cardInfo})
   },
   completeFun:function(){
-     wx.navigateTo({url:'../bindsuccess/index'})
+     var cardInfo = JSON.stringify(this.data.cardInfo)
+     wx.navigateTo({url:'../bindsuccess/index?cardInfo='+cardInfo})
   }
 })

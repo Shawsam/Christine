@@ -1,0 +1,34 @@
+<import src="../../model/model.wxml"/>
+<template is="areaData" data="{{...item}}"/>
+
+
+<view class="shadow" wx:if="{{modalState}}" bindtap="hideModal"></view>
+<view class="Modal" wx:if="{{modalState}}">
+	<view class="Modaltitle">温馨提示亲</view>
+	<view class="Modalcontent">
+		<image class="error" src="../../image/error.png" />
+        <view>您的个人信息修改失败</view>
+        <view>不要着急，换个姿势再来一次</view>
+        <view bindtap="closeModal" class="btn closeBtn">关闭</view>
+	</view>
+</view>
+
+<view class="container">
+	<view class="main">
+		<view class="title">资料修改</view>
+		<view class="name fm"><input maxlength="8" bindinput="nameInput" value="{{name}}" placeholder="亲告诉我你的名字" /></view>
+		<view class="birth fm">
+			<picker mode="date" value="{{date}}" start="1918-01-01" end="2018-05-03" bindchange="bindDateChange">
+				<view class="picker">{{date?date:'亲选择你的生日'}}</view>
+			</picker>
+		</view>
+		<view class="sex flexbox">
+			<view bindtap="chooseSex" data-param="0" class="flex-item women {{sexCode==0?'active':''}}">女生</view>
+			<view bindtap="chooseSex" data-param="1" class="flex-item man {{sexCode==1?'active':''}}">男生</view>
+		</view>
+		<view class="area fm" bindtap="translate">{{province!='undefinedundefinedundefined' && province!= null ?province+city+county:'请选择省市区'}}</view>
+		<view class="name fm"><input maxlength="20" value="{{email}}" bindinput="mailInput"  placeholder="电子邮箱" /></view>
+		<view bindtap="completeFun" class="completeBtn btn">完成编辑</view>
+		<view bindtap="logOutFun" class="logOutBtn btn">退出登录</view>
+	</view>
+</view>

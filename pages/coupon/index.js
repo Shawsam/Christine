@@ -74,7 +74,7 @@ Page({
     var _this = this
     wx.showLoading({title:'加载中'})
     wx.request({
-        url: app.globalData.host+'/coupon/couponList', 
+        url: app.globalData.host+'/coupon/couponListMini', 
         method:'GET',
         data: param,
         success: function (res) {
@@ -87,6 +87,9 @@ Page({
                   item.dateString = item.endDate.substr(0,4)+'/'+item.endDate.substr(4,2)+'/'+item.endDate.substr(6,2)
                 })
                _this.setData({couponData:couponData})
+            }else{
+               var errMsg = res.data.msg
+               wx.redirectTo({ url:'../view_state/index?error='+res.statusCode+'&errorMsg='+errMsg})
             }
         }
     })
@@ -119,7 +122,7 @@ Page({
     var _this = this
     wx.showLoading({title:'加载中'})
     wx.request({
-        url: app.globalData.host+'/coupon/couponList', 
+        url: app.globalData.host+'/coupon/couponListMini', 
         method:'GET',
         data: param,
         success: function (res) {

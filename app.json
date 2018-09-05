@@ -1,11 +1,15 @@
 {
-  "pages":[
+  "pages":[  
     "pages/index/index",
+    "pages/discount/index",
+    "pages/vip/index",
+    "pages/userinfo/index",
     "pages/login/index",
+    "pages/protocol/index",
     "pages/welcome/index",
     "pages/bindcard/index",
     "pages/bindconfirm/index",
-    "pages/bindsuccess/index",
+    "pages/bindsuccess/index", 
     "pages/charge/index",
     "pages/chargeconfirm/index",
     "pages/chargesuccess/index",
@@ -14,6 +18,7 @@
     "pages/tradelist/index",
     "pages/card/index",
     "pages/account/index",
+    "pages/dev/index",
     "pages/view_state/index"
   ],
   "window":{
@@ -21,5 +26,27 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "克莉丝汀",
     "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "color":"#666",
+    "selectedColor":"#951e3e",
+    "backgroundColor":"#fff",
+    "borderStyle":"white",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "iconPath": "image/index.png",
+      "selectedIconPath": "image/index_active.png",
+      "text": "首页"
+    },{
+      "pagePath": "pages/discount/index",
+      "iconPath": "image/discount.png",
+      "selectedIconPath":"image/discount_active.png",
+      "text": "优惠促销"
+    },{
+      "pagePath": "pages/vip/index",
+      "iconPath": "image/vip.png",
+      "selectedIconPath": "image/vip_active.png",
+      "text": "会员权益"
+    }]
   }
 }

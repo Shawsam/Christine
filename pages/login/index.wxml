@@ -3,23 +3,67 @@
 
 <view class="container">
 	<view class="main">
-		<section wx:if="{{step==1}}">
-	        <view class="area fm"><label>国家/地区</label><span>中国</span></view>
-	        <view class="phone fm"><label>+86</label><input type="number" maxlength="11" bindinput="phoneInput" placeholder="请输入中国大陆地区手机号" /></view>
-	        <button class="getCode btn" open-type="getUserInfo" bindgetuserinfo="getCodeFun">登录</button>
+		<image class="logo" src="../../image/logow.png" />
+		<section class="section1" wx:if="{{step==1}}">
+	        <view class="fm">
+		    	<view class="fm-group area"><view class="label">国家/地区</view><view class="country">中国</view></view>
+		    	<view class="fm-group tel"><view class="label">+86</view><input type="number" maxlength="11" bindinput="phoneInput" placeholder="请输入中国大陆地区手机号" value="{{mobile}}"  /></view>
+		        <view class="fm-group yzImg">
+                   <input placeholder="请填写图形验证码" maxlength="4" bindinput="captchaInput" />
+	               <image  class="captcha" src="{{codeImg}}" bindtap="getCaptcha" />
+<!-- 		       <view class="captcha" bindtap="captchaFun">
+		        		<view class="num">{{captcha[0]}}</view>
+		        		<view class="num">{{captcha[1]}}</view>
+		        		<view class="num">{{captcha[2]}}</view>
+		        		<view class="num">{{captcha[3]}}</view>
+		        	</view> -->
+		        </view>
+		    </view>
+		    <button class="getYzm btn" open-type="getUserInfo" bindgetuserinfo="getCodeFun">获取短信验证码</button>
 		</section>
 
-		<section wx:if="{{step==2}}">
-	        <view class="text">已发送短信验证码至</view>
-	        <view class="number">+86 {{mobile}}</view>
-	        <view wx:if="{{timer!=0}}" class="tip">({{timer}}秒后重试)</view>
-	        <view wx:if="{{timer==0}}" class="tip"  bindtap="RegetCodeFun">重新发送验证码</view>
-	        <view class="code fm"><input type="number" maxlength="6" bindinput="codeInput" placeholder="请输入收到的短信验证码" /></view>
-	        <view bindtap="yzCodeFun" class="yzCode btn">下一步</view>
+		<section class="section2" wx:if="{{step==2}}">
+			<view class="backBtn" bindtap="stepBack"><image src="../../image/back.png" />返回</view>
+		    <view class="fm">
+	            <view class="fm-group yzm"><input type="number" maxlength="6" bindinput="codeInput" placeholder="请输入收到的短信验证码" /></view>
+		    </view>
+		    <view class="info">
+		        <view class="tip">已发送短信至</view>
+	            <view class="tel">+86 <view class="inline"></view>{{mobile}}</view>
+	            <view wx:if="{{timer!=0}}" class="tip">( <view class="inline timer">{{timer}}</view> 秒后重试 )</view>
+	            <view wx:if="{{timer==0}}" class="tip"  bindtap="RegetCodeFun">重新发送验证码</view>
+	        </view>
+		    <view bindtap="yzCodeFun" class="nextBtn btn">下一步</view>
 		</section>
 
-		<section wx:if="{{step==3}}">
-	        <view class="title">新会员注册</view>
+		<section class="section3" wx:if="{{step==3}}">
+			<view class="fm">
+		        <view class="title">新会员注册</view>
+		        <view class="fm-group"><input bindinput="nameInput" placeholder="亲告诉我你的名字" /></view>
+		        <view class="fm-group">
+			        <picker mode="date" value="{{date}}" start="1918-01-01" end="2018-05-03" bindchange="bindDateChange">
+		        		<view class="picker">{{date?date:'亲告诉我你的生日'}}</view>
+		        	</picker>
+		        </view>
+<!-- 		        <view class="pwd fm-group"><input bindinput="pwdInput" placeholder="亲告诉我你的登录密码" /></view> -->
+		        <view class="flexbox">
+		        	<view class="sex {{sexCode==0?'active':''}}" bindtap="chooseSex" data-param="0">
+		        	    <image class="sexImg" src="../../image/girl.png" /><view class="tip">我是女森</view>
+		            </view>
+		        	<view class="sex {{sexCode==1?'active':''}}"  bindtap="chooseSex" data-param="1" >	        	
+		        	    <image class="sexImg" src="../../image/boy.png" /><view class="tip">我是男森</view>
+		            </view>
+		        </view>
+<!-- 		        <view class="area fm-group" bindtap="translate">{{province?province+city+county:'请选择省市区'}}</view> -->
+	        </view>
+		    <view bindtap="completeFun" class="nextBtn btn">下一步</view>
+		    <view class="flexbox rules">
+		    	<view><image class="icon" src="../../image/rule.png" />会员章程</view>
+		    	<view catchtap="openProtocol">查看详情 ></view>
+		    </view>
+
+
+<!-- 	    <view class="title">新会员注册</view>
 	        <view class="name fm"><input bindinput="nameInput" placeholder="亲告诉我你的名字" /></view>
 	        <view class="birth fm">
 	        	<picker mode="date" value="{{date}}" start="1918-01-01" end="2018-05-03" bindchange="bindDateChange">
@@ -28,26 +72,22 @@
 	        </view>
 	        <view class="referer fm"><input bindinput="referrerInput" placeholder="亲告诉我推荐人编号" /></view>
             <view class="sex flexbox">
-            	<view bindtap="chooseSex" data-param="1" class="flex-item women {{sexCode==2?'active':''}}">女生</view>
-            	<view bindtap="chooseSex" data-param="2" class="flex-item man {{sexCode==1?'active':''}}">男生</view>
+            	<view bindtap="chooseSex" data-param="0" class="flex-item women {{sexCode==0?'active':''}}">女生</view>
+            	<view bindtap="chooseSex" data-param="1" class="flex-item man {{sexCode==1?'active':''}}">男生</view>
             </view>
-<!--        <view class="area fm">
-	        	<picker mode="date" value="{{date}}" start="1918-01-01" end="2018-05-03" bindchange="bindDateChange">
-	        		<view class="picker">{{date?date:'亲选择你的生日'}}</view>
-	        	</picker>
-	        </view> -->
 	        <view class="area fm" bindtap="translate">{{province?province+city+county:'请选择省市区'}}</view>
             <view class="pwd fm"><input bindinput="pwdInput" placeholder="登录密码" /></view>
             <view class="approve" bindtap="approveFun">
             	<image class="flag" src="{{approveFlag?'../../image/choosed.png':'../../image/choose.png'}}" />
-                已阅读《会员手册》并同意条款
+                已阅读<view catchtap="openProtocol">《会员手册》</view>并同意条款
             </view>
-            <view bindtap="completeFun" class="completeBtn btn">下一步</view>
+            <view bindtap="completeFun" class="completeBtn btn">下一步</view> -->
 		</section>
+
+		<image wx:if="{{winHeight>500}}" class="words" src="../../image/words.png" />
 	</view>
 
 	<view class="bottom">
-		<image src="../../image/logo.png" />
 		<view class="page">
 			<view wx:if="{{step==1}}">
 			    <image src="../../image/choosed.png" />

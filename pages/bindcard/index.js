@@ -4,7 +4,9 @@ const app = getApp()
 
 Page({
   data: {
-    userInfo: null
+    userInfo: null,
+    cardNo:'',
+    pwd:''
   },
   onLoad: function () {
     
@@ -28,6 +30,15 @@ Page({
           password:pwd
         }
 
+    if(cardNo==''){
+       wx.showModal({content:'请输入卡号',showCancel:false})
+       return
+    }
+    if(pwd==''){
+       wx.showModal({content:'请输入密码',showCancel:false})
+       return
+    }
+
     wx.showLoading({title:'加载中'})
     wx.request({
               url: app.globalData.host+"/card/bindCard",
@@ -39,11 +50,11 @@ Page({
                 console.log(res)
                 wx.hideLoading()
                 if(res.data.errcode == 0){
-                   wx.redirectTo({url:'../bindconfirm/index'})
+                   var cardInfo = JSON.stringify(res.data)
+                   wx.redirectTo({url:'../bindconfirm/index?cardInfo='+cardInfo})
                 }else{
                    var errMsg = res.data.msg
                    wx.showModal({content:errMsg})
-                   // wx.redirectTo({ url:'../view_state/index?error='+res.statusCode+'&errorMsg='+errMsg})
                 }
               }
     })             

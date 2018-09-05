@@ -1,11 +1,16 @@
 /* ================================================================================================ */
 /* =========通用样式========= */
 .flexbox { display:-webkit-box; display:-webkit-box-flex; display:box; display:-webkit-flex; display:flex; -webkit-box-pack:justify; -webkit-justify-content:space-around; }
+.flexbox > .item { -webkit-box-flex:1; box-flex:1; flex:1; }
 .flexbox > .flex-item { -webkit-box-flex:1; box-flex:1; flex:1;  }
 ::-webkit-scrollbar { width: 0; height: 0; color: transparent;}
-page{ height:100%; font:26rpx/40rpx "微软雅黑"; }
-.btn:active{ opacity:0.9; }
 
+
+page{ height:100%; font:28rpx/40rpx "微软雅黑";  }
+.container{ height:100%; box-sizing:border-box;  overflow-y:scroll;-webkit-overflow-scrolling:touch;  position:relative; }
+.btn{  background:#951E3E; height:90rpx; line-height:90rpx; text-align:center; color:#fff; border-radius:30rpx; }
+.btn:active{ opacity:0.8; }
+.inline{ display:inline-block; }
 /* ================================================================================================ */
 /* =========字体图标========= */
 @font-face {
@@ -27,4 +32,12 @@ page{ height:100%; font:26rpx/40rpx "微软雅黑"; }
 	-moz-osx-font-smoothing: grayscale;
 }
 .iconfont:before { vertical-align:-10%; }
+.empty{ text-align:center; width:100%; color:#999; position:absolute; top:40%;  transform:translateY(-50%); }
+.empty image{ height:100rpx; width:100rpx; display:block; margin:15rpx auto; }
 
+.shadow{ position:fixed; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000; }
+.Modal{ position:fixed; width:80%; left:10%; top:120rpx; background:#fff; z-index:1001; border-radius:15rpx; padding-bottom:25rpx; }
+.Modal .Modaltitle{ height:90rpx; line-height:90rpx; color:#951E3E; text-align:center; font-size:35rpx; border-bottom:1px dashed #951E3E; }
+.Modal .Modalcontent{ padding:40rpx; text-align:center; font-size:30rpx; color:#444;  }
+.Modal .Modalcontent .error{ height:270rpx; width:270rpx; }
+.Modal .Modalcontent .closeBtn{ margin:80rpx auto 30rpx auto; display:inline-block; width:230rpx; height:55rpx; line-height:55rpx; border-radius:8rpx; }

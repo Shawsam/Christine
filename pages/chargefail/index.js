@@ -9,6 +9,7 @@ Page({
     userInfo: null
   },
   onLoad: function (option) {
+  	 console.log(option)
      console.log(formatTime(1000*option.date))
   },
   backTap:function(){

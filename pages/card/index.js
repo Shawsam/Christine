@@ -1,6 +1,10 @@
+var isInitSelfShow = false
 var page = 0
+var time = 0
+var touchDot = 0 
+var interval
 const app = getApp()
-const swiperWidth = parseInt(wx.getSystemInfoSync().screenWidth/750*560)
+const swiperWidth = parseInt(wx.getSystemInfoSync().screenWidth/750*615)
 
 
 Page({
@@ -8,13 +12,30 @@ Page({
     cardType:1,
     page:page
   },
+  onShow:function(){
+    isInitSelfShow && this.onLoad()
+  },
+  onHide() {
+    isInitSelfShow = true;
+  },
   onLoad:function(){
+    this.setData({userInfo:app.globalData.userInfo})
+    
     var _this = this,
     param = {
       mini:'mini',
       openId:app.globalData.openId,
-      userId:app.globalData.userId
+      userId:app.globalData.userId,
+      cardNo:app.globalData.cardNo,
+      userInfo:app.globalData.userInfo
     }
+    
+    page = 0
+    var animation = wx.createAnimation()
+    animation.translateX(-1*page*swiperWidth).step()
+    this.setData({
+      animationData:animation.export()
+    })
 
     wx.showLoading({title:'加载中'})
     wx.request({
@@ -30,12 +51,16 @@ Page({
                var cards = res.data.data
                var eCard,entityCards=[]
                cards.map(function(item){
+                   item.bala = item.bala.toFixed(2)
+                   item.cardImg = _this.getSrc(item.typeId)
                    if(item.cardAttr==3){
                       eCard = item
                    }else{
                       entityCards.push(item)
                    }
                }) 
+
+               console.log(entityCards)
                _this.setData({
                  eCard:eCard,
                  entityCards:entityCards
@@ -69,7 +94,6 @@ Page({
       animationData:animation.export()
     })
   },
-
   openCard:function(e){
      var cardType = e.currentTarget.dataset.param
      this.setData({cardType:cardType})
@@ -86,7 +110,40 @@ Page({
   TobindCard:function(){
      wx.navigateTo({url:'../bindcard/index'})
   },
-  onShow:function(){
-     this.onLoad()
+
+  openAccount:function(){
+     wx.navigateTo({url:'../account/index'})
+  },
+  // 触摸开始事件
+  touchStart: function (e) {
+    touchDot = e.touches[0].pageX; // 获取触摸时的原点
+    interval = setInterval(function () {
+      time++;
+    }, 100);
+  },
+  // 触摸结束事件
+  touchEnd: function (e) {
+    var touchMove = e.changedTouches[0].pageX;
+    // 向左滑动   
+    if (touchMove - touchDot <= -40 && time < 10) {
+      this.nextClick()
+    }
+    // 向右滑动   
+    if (touchMove - touchDot >= 40 && time < 10) {
+      this.prevClick()
+    }
+    clearInterval(interval); // 清除setInterval
+    time = 0;
+  },
+  getSrc:function(id){
+      switch(id){
+        case 6545: return('../../image/6545.jpg');break;
+        case 6546: return('../../image/6546.jpg');break;
+        case 6547: return('../../image/6547.jpg');break;
+        case 6548: return('../../image/6548.jpg');break;
+        case 6549: return('../../image/6549.jpg');break;
+        case 6550: return('../../image/6550.jpg');break;
+        default: return('../../image/0000.jpg'); break;
+      }
   }
 })

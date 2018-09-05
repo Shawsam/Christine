@@ -3,29 +3,32 @@
 	<view class="Modal" wx:if="{{modalState}}">
 		<view class="Modaltitle">现金券使用提示</view>
 		<view class="Modalcontent">
-			<view class="name">{{currentItem.type.typeName}}</view>
+			<view class="name">您选择{{currentItem.type.typeName}}</view>
 			<view class="time">有效期至{{currentItem.dateString}}</view>
 			<image class="qrcode"  mode="scaleToFill" src="{{imagePath}}" />
 	        <view class="text">
-		        <view class="title">优惠券使用说明</view>
-			    <view>1、优惠券使用说明优惠券使用说明优惠券使用说明优惠券</view>
-		        <view>2、优惠券使用说明优惠券使用说明</view>
-		        <view>3、优惠券使用说明优惠券使用说明优惠</view>
+		        <view class="title">优惠券说明</view>
+			    <view class="rule"><label>1、</label>优惠券使用说明优惠券使用说明优惠券使用说明优惠券</view>
+		        <view class="rule"><label>2、</label>优惠券使用说明优惠券使用说明</view>
+		        <view class="rule"><label>3、</label>优惠券使用说明优惠券使用说明优惠</view>
 		    </view>
 		</view>
+		<image class="tag" src="../../image/tag.png" />
 	</view>
 	<view class="main">
        <view class="item" data-param="{{index}}" bindtap="infoScan" wx:for="{{couponData}}" wx:key="{{index}}">
-       	  <image src="../../image/coupon.png" />
-       	  <view class="val">{{item.couponValue}}</view>
-       	  <view class="info">
-       	      <view class="desp">{{item.type.typeName}}</view>
-       	      <view class="datelabel">有效期至：</view>
-       	      <view class="date">{{item.dateString}}</view>
-       	  </view>
+       	  <image src="../../image/coupon.jpg" />
+       	  <view class="val">￥<view class="num">{{item.couponValue}}</view></view>
+   	      <view class="desp">{{item.type.typeName}}</view>
+   	      <view class="date">有效期至：{{item.dateString}}</view>
        </view>
        <view class="noMore" wx:if="{{noMore}}">没有更多数据了</view>
 	</view>
+
+	<view class="empty" wx:if="{{couponData.length==0}}">
+        <image src="../../image/empty.png" />
+        <view>暂无优惠券</view>
+    </view>
 </scroll-view>
 
 <view class="canvas-box">

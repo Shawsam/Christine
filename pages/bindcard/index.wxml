@@ -6,5 +6,5 @@
 	      <view class="pwd fm"><input bindinput="pwdInput" placeholder="请输入密码" /></view>
       </view>
    </view>
-   <view class="btn bindBtn" bindtap="bindFun" >立即绑定</view>
+   <view class="btn bindBtn" bindtap="bindFun" >下一步</view>
 </view>

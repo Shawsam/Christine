@@ -1,19 +1,14 @@
 <view class="container">
    <view class="top">
-      <image class="head" src="../../image/header.png" />
-      <image class="card1" src="../../image/card1.jpg" />
+      <image class="card1" src="../../image/cardbind.jpg" />
    </view>
    <section>
    	    <view class="info">
-   	    	<view class="item"><view><label>卡号：</label>123456789</view></view>
-   	    	<view class="item"><view><label>余额：</label>1280.00</view></view>
-   	    	<view class="item"><view><label>电子券：</label>5张</view></view>
-   	    	<view class="item"><view><label>积分：</label>23516</view></view>
+          <view class="item"><view><label>卡号：</label>{{cardInfo.cardNo}}</view></view>
+          <view class="item"><view><label>余额：</label>{{cardInfo.bala}}</view></view>
+          <view class="item"><view><label>电子券：</label>{{cardInfo.couponCount}}张</view></view>
+          <view class="item"><view><label>积分：</label>{{cardInfo.points}}</view></view>
    	    </view>
-   	    <view class="approve" bindtap="approveFun">
-            <image class="flag" src="{{approveFlag?'../../image/choosed.png':'../../image/choose.png'}}" />
-                允许不通过不带密支付小额支付
-        </view>
-   	    <view class="btn completeBtn" bindtap="completeFun" >完成绑定</view>
+   	    <view class="btn completeBtn" bindtap="completeFun">完成绑定</view>
    </section>
 </view>

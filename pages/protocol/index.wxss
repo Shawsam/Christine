@@ -1,0 +1,6 @@
+.container{ background:#fdfdfd; font-size:25rpx; }
+.rule{ width:100%; height:3350rpx;}
+.agree{ text-align:center; margin:20rpx 0 50rpx 0; }
+.agree image.flag{ width:40rpx; height:40rpx; display:inline-block; vertical-align:middle; margin-top:-5rpx; margin-right:10rpx;}
+
+.inline{ color:#951E3E; }

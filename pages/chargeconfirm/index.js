@@ -10,6 +10,9 @@ Page({
     this.setData({chargeVal:option.val})
   },
   chargeConfirm:function(){
+    if(this.data.jumpLock) return
+
+    this.setData({jumpLock:true})
   	var _this = this,
   	    param = {
     			mini:'mini',
@@ -29,6 +32,7 @@ Page({
             //服务器返回的结果
             console.log(res);
             wx.hideLoading()
+
             if (res.data.errcode == 0) {
                   //调微信支付
                   var resdata = res.data
@@ -41,11 +45,23 @@ Page({
                        'paySign': resdata.paySign,
                        'success':function(res){
                            wx.redirectTo({
-                             url: '../chargesuccess/index?date='+resdata.timeStamp+'&fee='+_this.data.chargeVal
+                             url: '../chargesuccess/index?date='+resdata.timeStamp+'&fee='+_this.data.chargeVal,
+                             success:function(){
+                                  setTimeout(function(){
+                                     _this.setData({jumpLock:false});
+                                  },500)
+                              }
                            })
                         },
                        'fail':function(res){
-                            wx.redirectTo({ url: '../chargefail/index?date='+resdata.timeStamp+'&fee='+_this.data.chargeVal })
+                            wx.redirectTo({ 
+                              url: '../chargefail/index?date='+resdata.timeStamp+'&fee='+_this.data.chargeVal,
+                              success:function(){
+                                  setTimeout(function(){
+                                     _this.setData({jumpLock:false});
+                                  },500)
+                              }
+                            })
                         }
                     }) 
                   }

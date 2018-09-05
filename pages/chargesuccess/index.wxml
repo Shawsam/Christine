@@ -11,4 +11,8 @@
         <view class="phone">400 820 5000</view>
         <view bindtap="backTap" class="btn backBtn">返回</view>
     </view>
+
+    <view class="bottom">
+        <image src="../../image/logo.png" />
+    </view>
 </view>

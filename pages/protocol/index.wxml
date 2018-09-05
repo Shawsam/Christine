@@ -1,0 +1,4 @@
+<view class="container">
+	<image class="rule" src="../../image/rule.jpg" />
+	<view class="agree" bindtap="approveFun"><image class="flag" src="{{approveFlag?'../../image/agreed.png':'../../image/agree.png'}}" />我已阅读并同意<view class="inline">《会员章程》</view></view>
+</view>

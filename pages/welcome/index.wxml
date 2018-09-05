@@ -1,6 +1,14 @@
 <view class="container">
-	<view class="flexbox btnGroup">
-		<view class="flex-item btn" bindtap="ToUserCenter">会员中心</view>
-		<view class="flex-item btn" bindtap="ToBindCard">绑定会员卡</view>
-	</view>
+	<view class="main">
+	    <image class="logo" src="../../image/logo.png" />
+	    <view class="fm">
+	    	<image class="pass" src="../../image/pass.png" />
+	        <view class="flexbox">
+	        	<view class="btn" bindtap="ToUserCenter">会员中心</view>
+	        	<view class="btn" bindtap="ToBindCard">绑定会员卡</view>
+	        </view>
+        </view>
+	    <image wx:if="{{winHeight>500}}" class="words" src="../../image/words.png" />
+    </view>
 </view>
+

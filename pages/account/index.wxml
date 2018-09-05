@@ -1,37 +1,56 @@
-<view class="container">
+<view class="container  {{qrcodeShow?'noscroll':''}}">
+    <view bindtap="hideModal" class="shadow" wx-if="{{qrcodeShow}}"></view>
+    <view class="qrcodeModal Modal" wx-if="{{qrcodeShow}}">
+        <view class="Modaltitle">扫码支付</view>
+        <view class="Modalcontent">
+           <image class="code"  mode="scaleToFill" src="{{imagePath}}" /> 
+           <view class="tip">每分钟自动更新</view> 
+        </view>
+    </view>  
+
     <view class="qrcodeCon">
     	<view class="title">
-    		<view>账户消费</view>
-    		<view class="num">123456789</view>
+    		<view>{{page==0?'会员码':'账户消费'}}</view>
+    		<view class="num">{{Cards[page].cardNo}}</view>
     	</view>
-        <image class="code"  mode="scaleToFill" src="{{imagePath}}" />	
-    	<view class="tip">每分钟自动更新</view>
-    	<view class="balance">卡内余额 | <label class="val">{{entityCards[page].bala}}</label></view>
+        <view class="canvas" wx:if="{{page==0 && !qrcodeShow}}">
+            <canvas class="barcode" canvas-id="barcode" />
+        </view>
+        <block wx:if="{{page!=0}}">
+            <image class="code"  mode="scaleToFill" src="{{imagePath}}" />	
+    	    <view class="tip">每分钟自动更新</view>
+        </block>
+    	<view class="balance">卡内余额<label class="val">{{Cards[page].bala}}</label></view>
+        <image wx:if="{{page==0}}" bindtap="openQrcode" class="scanIcon" src="../../image/scan.png" />
+        <image class="tag" src="../../image/tag.png" />
     </view>
 
-<!--     <view class="swiper">
+<!--
+    <view class="swiper">
     	<image class="slide" src="../../image/card1.jpg" />
     	<image class="prev" src="../../image/prev.png" />
     	<image class="next" src="../../image/next.png" />
-    </view> -->
+    </view>
+-->
 
     <view class="swiper">
-    <view class="swiperCon">
-        <view class="swiperGroup" animation="{{animationData}}" style="width:{{entityCards.length*540}}rpx">
-            <view class="slide" wx:key="{{index}}" wx:for="{{entityCards}}">
-                <image src="../../image/card1.jpg" />
-                <view class="cardNo">{{item.cardNo}}</view>
+    <view class="swiperCon" bindtouchstart="touchStart" bindtouchend="touchEnd">
+        <view class="swiperGroup" animation="{{animationData}}" style="width:{{Cards.length*615}}rpx">
+            <view class="slide" wx:key="{{index}}" wx:for="{{Cards}}">
+                <image wx-if="{{item.cardAttr!=3}}" src="{{item.cardImg}}" />
+                <image wx-if="{{item.cardAttr==3}}" src="../../image/6549.jpg" />
+                <p class="bala c{{item.typeId}}">余额 <span>{{item.bala}}</span></p>
+                <image wx-if="{{item.cardAttr==3}}" class="avatar" src="{{userInfo.avatarUrl||'../../image/avatar.jpg'}}" />
+                <view class="cardNo c{{item.typeId}}">{{item.cardNo}}</view>
             </view>
         </view>
     </view>
     <image bindtap="prevClick" class="prev" src="../../image/prev.png" />
     <image bindtap="nextClick" class="next" src="../../image/next.png" />
     </view>
-    <view class="page"> {{page+1}} /3 </view>
+    <view class="page"> {{page+1}} /{{Cards.length}}</view>
 </view>
 
-
-
 <view class="canvas-box">
-  <canvas  hidden="{{canvasHidden}}" style="width:668rpx;height:668rpx;background:#f1f1f1;margin:0 auto;" canvas-id="mycanvas"/>
+    <canvas  hidden="{{canvasHidden}}" style="width:668rpx;height:668rpx;background:#f1f1f1;margin:0 auto;" canvas-id="mycanvas"/>
 </view>

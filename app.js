@@ -1,5 +1,5 @@
 //app.js
-var host = "https://weixin.chinauff.com/lnj-weixin/console/dc";
+var host = "https://weixin.christine.com.cn/weixin-klst/console/klstweixin";
 var host_dev = "https://demo.i-manji.com/weixin-klst/console/klstweixin";
 
 App({
@@ -11,8 +11,8 @@ App({
   onLaunch: function () {
     // 缓存的useId
     var userId = wx.getStorageSync('userId')
+    console.log(userId)
     this.globalData.userId = userId
-
     // 登录
     var _this = this
     wx.login({
@@ -32,7 +32,6 @@ App({
                           //服务器返回的结果
                           console.log('用户信息')
                           console.log(res)
-                          
                           if (res.data.errcode == 0) {
                              var openId = res.data.miniOpenId
                              _this.globalData.openId = openId
@@ -74,7 +73,7 @@ App({
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
+                 this.userInfoReadyCallback(res)
               }
             }
           })

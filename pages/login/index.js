@@ -4,9 +4,11 @@ const app = getApp()
 var model = require('../../model/model.js')
 var show = false;
 var item = {};
+var timeCounter;
 
 Page({
   data: {
+    codeImg:'',
     userInfo: null,
     userId:'',
     step:1,
@@ -16,7 +18,10 @@ Page({
     smscode:'',
     timer:60,
     date:'',
-    item: { show: show }
+    captchaIn:'',
+    captcha:[],
+    item: { show: show },
+    winHeight:wx.getSystemInfoSync().windowHeight
   },
   is_phone:function(str){
     var reg=/^1\d{10}$/;
@@ -25,9 +30,35 @@ Page({
     else
       return false;
   },
-  onLoad: function (option) {
+  getCaptcha:function(){
+     this.setData({codeImg:app.globalData.host+'/imgCode/getImageCode?mini=mini&v='+Math.floor(Math.random()*10)})
+  },
+  captchaFun:function(){
+     var captcha = []
+     for(var i=0;i<4;i++){
+        captcha.push(Math.floor(Math.random()*10))
+     }
+     this.setData({captcha:captcha,captchaString:captcha.join('')})
+  },
+  captchaInput:function(e){
+    this.setData({
+        captchaIn: e.detail.value
+    })
+  },
+  onShow:function(){
+     this.captchaFun()
+     this.getCaptcha()
+     var approveFlag = wx.getStorageSync('approveRule')
+     this.setData({approveFlag:approveFlag})
+  },
+  stepBack:function(){
+     this.captchaFun()
+     this.setData({step:1})
+     clearInterval(timeCounter)
+  },
+  onLoad: function (option) {  
+    wx.setStorageSync('approveRule',false)
     this.setData({openId:app.globalData.openId})
-
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -86,7 +117,8 @@ Page({
     })
   },
   getCodeFun: function(e){
-    console.log(!e.detail.userInfo)
+    if(this.data.clickLock) return;
+    
     if(!e.detail.userInfo){
         wx.showModal({content:'请允许微信授权',showCancel:false})
         return
@@ -94,7 +126,7 @@ Page({
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
-      sexCode:e.detail.userInfo.gender
+      sexCode:e.detail.userInfo.gender==2?0:1
     })
 
     //参数校验
@@ -109,30 +141,43 @@ Page({
        return
     }
     
+    var captchaIn = this.data.captchaIn
+    if(captchaIn == ''){
+       wx.showModal({content:'请输入图形验证码'})
+       return
+    }
+    // if(captchaIn != captchaString){
+    //    wx.showModal({content:'图形验证码有误'})
+    //    this.captchaFun()
+    //    return
+    // }
+
+    var _this = this
     var param = {
        mini:'mini',
+       imgCode:captchaIn,
        openId:app.globalData.openId,
        mobile:mobile
     }
-    var _this = this
-
+    _this.setData({clickLock:true})
     wx.showLoading({title:'加载中'})
     wx.request({
-              url: app.globalData.host+"/sms/sendCodeMini",
-              method:'POST',
-              header: {  "Content-Type": "application/x-www-form-urlencoded" }, 
+              url: app.globalData.host+"/imgCode/checkImgCode",
+              method:'GET',
               data: param,
               success: function(res) {
                 //服务器返回数据
-                console.log(res)
+                _this.setData({clickLock:false})
                 wx.hideLoading()
-                if(res.data.errcode == 0){
-                    var userId = res.data.data
-                    console.log(userId)
+                if(res.data.code == 0){
+                    // var userId = res.data.data
+                    // console.log(userId)
 
-                    _this.setData({step:2,
-                                   userId:userId})
-                    var timeCounter = setInterval(function(){
+                    // _this.setData({step:2,
+                    //                userId:userId})
+
+                    _this.setData({step:2,timer:60})
+                      timeCounter = setInterval(function(){
                       var timer =  _this.data.timer
                       if(timer == 0){
                         clearInterval(timeCounter)
@@ -140,40 +185,45 @@ Page({
                       }
                       _this.setData({timer:timer-1})                    
                     },1000)
+                }else{
+                    wx.showModal({content:res.data.msg})
                 }
               }
-    })             
+    })    
+   
   },
 
   RegetCodeFun:function(){
-    var param = {
-       mini:'mini',
-       openId:app.globalData.openId,
-       mobile:this.data.mobile
-    }
-    var _this = this
-    wx.showLoading({title:'加载中'})
-    wx.request({
-              url: app.globalData.host+"/sms/sendCodeMini",
-              method:'POST',
-              header: {  "Content-Type": "application/x-www-form-urlencoded" }, 
-              data: param,
-              success: function(res) {
-                //服务器返回数据
-                wx.hideLoading()
-                if(res.data.errcode == 0){
-                    _this.setData({timer:60})
-                    var timeCounter = setInterval(function(){
-                      var timer =  _this.data.timer
-                      if(timer == 0){
-                        clearInterval(timeCounter)
-                        return
-                      }
-                      _this.setData({timer:timer-1})                    
-                    },1000)
-                }
-              }
-    })     
+    this.setData({step:1})
+    clearInterval(timeCounter)
+    // var param = {
+    //    mini:'mini',
+    //    openId:app.globalData.openId,
+    //    mobile:this.data.mobile
+    // }
+    // var _this = this
+    // wx.showLoading({title:'加载中'})
+    // wx.request({
+    //           url: app.globalData.host+"/sms/sendCodeMini",
+    //           method:'POST',
+    //           header: {  "Content-Type": "application/x-www-form-urlencoded" }, 
+    //           data: param,
+    //           success: function(res) {
+    //             //服务器返回数据
+    //             wx.hideLoading()
+    //             if(res.data.errcode == 0){
+    //                 _this.setData({timer:60})
+    //                 var timeCounter = setInterval(function(){
+    //                   var timer =  _this.data.timer
+    //                   if(timer == 0){
+    //                     clearInterval(timeCounter)
+    //                     return
+    //                   }
+    //                   _this.setData({timer:timer-1})                    
+    //                 },1000)
+    //             }
+    //           }
+    // })     
   },
 
 
@@ -183,6 +233,7 @@ Page({
     })
   },
   yzCodeFun: function(){
+    if(this.data.clickLock2) return;
     //参数校验
     var smscode = this.data.smscode
     if(smscode == ''){
@@ -195,66 +246,74 @@ Page({
        return
     }  
 
-    var userId = this.data.userId
-    console.log(userId)
-    if(userId){   //会员用户，直接跳转首页
-      var param = {
-           mini:'mini',
-           openId:app.globalData.openId,
-           mobile:this.data.mobile,
-           code:smscode
-        }
-        var _this = this
-
-        wx.showLoading({title:'加载中'})
-        wx.request({
-                  url: app.globalData.host+"/member/loginMini",
-                  method:'POST',
-                  header: {  "Content-Type": "application/x-www-form-urlencoded" }, 
-                  data: param,
-                  success: function(res) {
-                    //服务器返回数据
-                    console.log(res)
-                    wx.hideLoading()
-                    if(res.data.errcode == 0){
-                        app.globalData.userId = userId
-                        wx.setStorageSync('userId',userId)
-                        wx.navigateTo({url:'../index/index'})
-                    }else{
-                        wx.showModal({content:res.data.msg})
-                    }
-                  }
-        })
-    }else{
-      var param = {
-           mini:'mini',
-           openId:app.globalData.openId,
-           mobile:this.data.mobile,
-           smscode:smscode
-        }
-        var _this = this
-        wx.showLoading({title:'加载中'})
-        wx.request({
-                  url: app.globalData.host+"/sms/checkCodeMini",
-                  method:'POST',
-                  header: {  "Content-Type": "application/x-www-form-urlencoded" }, 
-                  data: param,
-                  success: function(res) {
-                    //服务器返回数据
-                    console.log(res)
-                    wx.hideLoading()
-                    if(res.data.errcode == 0){
-                        var userId = res.data.userId
-                        app.globalData.userId = userId
-                        wx.setStorageSync('userId',userId)
-                        _this.setData({step:3,
-                                       userId:userId})
-                    }else{
-                        wx.showModal({content:res.data.msg})
-                    }
-                  }
-        })  
+    // var userId = this.data.userId
+    // console.log(userId)
+    // if(userId){   //会员用户，直接跳转首页
+    var param = {
+       mini:'mini',
+       openId:app.globalData.openId,
+       mobile:this.data.mobile,
+       code:smscode
     }
+    var _this = this
+
+    wx.showLoading({title:'加载中'})
+    this.setData({clickLock2:true})
+    wx.request({
+              url: app.globalData.host+"/member/loginMini",
+              method:'POST',
+              header: {  "Content-Type": "application/x-www-form-urlencoded" }, 
+              data: param,
+              success: function(res) {
+                //服务器返回数据
+                console.log(res)
+                wx.hideLoading()
+                if(res.data.errcode == 0){
+                    var userId = res.data.userId;
+                    if(userId){
+                        app.globalData.userId = userId
+                        wx.setStorageSync('userId',userId)
+                        wx.switchTab({url:'../index/index'})
+                    }else{
+                        _this.setData({step:3})
+                    }
+                }else{
+                    wx.showModal({content:res.data.msg})
+                    _this.setData({clickLock2:false})
+                }
+              }
+    })
+   //}
+    // else{
+    //   var param = {
+    //        mini:'mini',
+    //        openId:app.globalData.openId,
+    //        mobile:this.data.mobile,
+    //        smscode:smscode
+    //     }
+    //     var _this = this
+    //     wx.showLoading({title:'加载中'})
+    //     wx.request({
+    //               url: app.globalData.host+"/sms/checkCodeMini",
+    //               method:'POST',
+    //               header: {  "Content-Type": "application/x-www-form-urlencoded" }, 
+    //               data: param,
+    //               success: function(res) {
+    //                 //服务器返回数据
+    //                 console.log(res)
+    //                 wx.hideLoading()
+    //                 if(res.data.errcode == 0){
+    //                     var userId = res.data.userId
+    //                     app.globalData.userId = userId
+    //                     wx.setStorageSync('userId',userId)
+    //                     _this.setData({step:3,
+    //                                    userId:userId})
+    //                 }else{
+    //                     wx.showModal({content:res.data.msg})
+    //                 }
+    //               }
+    //     })  
+    // }
   },
 
   nameInput:function(e){
@@ -282,6 +341,9 @@ Page({
   },
 
   completeFun: function(){
+
+    if(this.data.clickLock3) return;
+
     var mobile = this.data.mobile,
         gender = this.data.sexCode,
         name = this.data.name,
@@ -304,22 +366,23 @@ Page({
        return
     }
 
-    if(!province){
-       wx.showModal({content:'请选择省市区'})
-       return
-    }
+    // if(!province){
+    //    wx.showModal({content:'请选择省市区'})
+    //    return
+    // }
 
-    if(!psw){
-       wx.showModal({content:'请输入登录密码'})
-       return
-    }
-
+    // if(!psw){
+    //    wx.showModal({content:'请输入登录密码'})
+    //    return
+    // }
+     
     if(!approveFlag){
-       wx.showModal({content:'阅读《会员手册》并同意条款'})
+       //wx.showModal({content:'阅读《会员手册》并同意条款'})
+       this.openProtocol()
        return
     }
 
-
+    // "address":province+'-'+city+'-'+district,
     var param = {
           "mini":"mini",
           "referrer":referrer,
@@ -328,12 +391,14 @@ Page({
           "psw":psw,
           "gender":gender,
           "openId":app.globalData.openId,
-          "address":province+city+district,
+          "address":'',
+          "email":'',
           "mobile":mobile
     }
     var _this = this
 
     wx.showLoading({title:'加载中'})
+    this.setData({clickLock3:true})
     wx.request({
               url: app.globalData.host+"/member/registerNewMini",
               method:'POST',
@@ -344,10 +409,24 @@ Page({
                 console.log(res)
                 wx.hideLoading()
                 if(res.data.errcode == 0){
-                    app.globalData.userId = res.data.userId
-                    wx.navigateTo({url:'../welcome/index'})
+                    var userId = res.data.userId;
+                    app.globalData.userId = userId
+                    wx.setStorageSync('userId',userId)
+                    wx.redirectTo({
+                      url:'../welcome/index',
+                      success: function(res) {
+                          setTimeout(function(){
+                             _this.setData({clickLock3:false});
+                          },500)
+                      }
+                    })
                 }else{
-                    wx.showModal({content:res.data.msg})
+                  wx.showModal({
+                      content:res.data?res.data.msg:'服务器异常',
+                      success: function(res) {
+                          _this.setData({clickLock3:false})
+                      }
+                  })
                 }
               }
     })   
@@ -362,5 +441,8 @@ Page({
   chooseSex:function(e){
      var sexCode = e.currentTarget.dataset.param
      this.setData({sexCode:sexCode})
+  },
+  openProtocol:function(){
+     wx.navigateTo({url:'../protocol/index'})
   }
 })

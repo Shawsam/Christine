@@ -5,15 +5,13 @@ const app = getApp()
 Page({
   data: {
     userInfo: null,
-    step:1,
-    sexCode:1,
-    approveFlag:false
+    winHeight:wx.getSystemInfoSync().windowHeight
   },
   onLoad: function () {
-
+     this.setData({userId:app.globalData.userId})
   },
   ToUserCenter:function(){
-     wx.navigateTo({url:'../index/index'})
+     wx.switchTab({url:'../index/index'})
   },
   ToBindCard:function(){
      wx.navigateTo({url:'../bindcard/index'})

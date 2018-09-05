@@ -1,14 +1,22 @@
 var QR = require("../../utils/qrcode.js")
-var page = 0
-const app = getApp()
-const swiperWidth = parseInt(wx.getSystemInfoSync().screenWidth/750*540)
+var wxbarcode = require('../../utils/util.js');
 
+
+var page = 0
+var time = 0
+var touchDot = 0 
+var interval
+const app = getApp()
+const swiperWidth = parseInt(wx.getSystemInfoSync().screenWidth/750*615)
+var timer
 
 Page({
   data: {
-    page:page
+    page:page,
+    qrcodeShow:false
   },
   onLoad:function(){
+    this.setData({userInfo:app.globalData.userInfo})
     var _this = this,
     param = {
       mini:'mini',
@@ -28,19 +36,27 @@ Page({
             wx.hideLoading()
             if (res.data.errcode == 0) {
                var cards = res.data.data
-               var eCard,entityCards=[]
+               var eCard=[],entityCards=[]
                cards.map(function(item){
+                   item.cardImg = _this.getSrc(item.typeId)
+                   item.bala = item.bala.toFixed(2)
                    if(item.cardAttr==3){
-                      eCard = item
+                      item.typeId = 6549
+                      eCard.push(item)
                    }else{
                       entityCards.push(item)
                    }
                }) 
+               var Cards = eCard.concat(entityCards)
+
+               var memberCode = Cards[0].cardNo
                _this.setData({
                  eCard:eCard,
-                 entityCards:entityCards
+                 entityCards:entityCards,
+                 Cards:Cards,
+                 memberCode:memberCode
                })
-               _this.qrCodeFun()
+               wxbarcode.barcode('barcode',memberCode, 500, 150);
 
                
             }else{
@@ -49,14 +65,19 @@ Page({
             }
         }
     })
-
-    var timer = setInterval(function(){
-        _this.qrCodeFun()
-    },60000)
+    
+    if(getCurrentPages()[getCurrentPages().length-1].route=='pages/account/index'){
+        clearInterval(timer)
+        timer = setInterval(function(){
+            _this.qrCodeFun()
+        },60000)
+    }
 
   },
   nextClick:function(){
-    var cardNum = this.data.entityCards.length
+    var page = this.data.page
+    var cardNum = this.data.Cards.length
+
     if(page == cardNum-1)  return
     page ++
     this.setData({page:page})
@@ -68,6 +89,7 @@ Page({
     this.qrCodeFun()
   },
   prevClick:function(){
+    var page = this.data.page
     if(page == 0)  return
     page --
     this.setData({page:page})
@@ -80,13 +102,15 @@ Page({
     this.qrCodeFun()
   },
   qrCodeFun:function(){
+       // this.setData({canvasHidden:false})
+
        var _this = this,
-           entityCards =  this.data.entityCards,
+           Cards =  this.data.Cards,
            param = {
               mini:'mini',
               openId:app.globalData.openId,
               userId:app.globalData.userId,
-              cardNo:entityCards[page].cardNo
+              cardNo:Cards[page].cardNo
            }
       wx.request({
         url: app.globalData.host+'/member/QRCodeMini', 
@@ -106,6 +130,18 @@ Page({
           }
         }
       })
+
+      wxbarcode.barcode('barcode',this.data.memberCode, 500, 150);
+  },
+
+  openQrcode:function(){
+      this.qrCodeFun()
+      this.setData({qrcodeShow:true})
+  },
+
+  hideModal:function(){
+      this.setData({qrcodeShow:false})
+      wxbarcode.barcode('barcode',this.data.memberCode, 500, 150);
   },
 
   createQrCode:function(url,canvasId,cavW,cavH){
@@ -142,6 +178,7 @@ Page({
       success: function (res) {
           var tempFilePath = res.tempFilePath;
           that.setData({
+              // canvasHidden:true,
               imagePath:tempFilePath
           });
       },
@@ -158,5 +195,43 @@ Page({
       current: img, // 当前显示图片的http链接
       urls: [img] // 需要预览的图片http链接列表
     })
+  },
+  onUnload:function(){
+    clearInterval(timer)
+  },
+
+
+  // 触摸开始事件
+  touchStart: function (e) {
+    touchDot = e.touches[0].pageX; // 获取触摸时的原点
+    interval = setInterval(function () {
+      time++;
+    }, 100);
+  },
+  // 触摸结束事件
+  touchEnd: function (e) {
+    var touchMove = e.changedTouches[0].pageX;
+    // 向左滑动   
+    if (touchMove - touchDot <= -40 && time < 10) {
+      this.nextClick()
+    }
+    // 向右滑动   
+    if (touchMove - touchDot >= 40 && time < 10) {
+      this.prevClick()
+    }
+    clearInterval(interval); // 清除setInterval
+    time = 0;
+  },
+  getSrc:function(id){
+      switch(id){
+        case 6545: return('../../image/6545.jpg');break;
+        case 6546: return('../../image/6546.jpg');break;
+        case 6547: return('../../image/6547.jpg');break;
+        case 6548: return('../../image/6548.jpg');break;
+        case 6549: return('../../image/6549.jpg');break;
+        case 6550: return('../../image/6550.jpg');break;
+        default: return('../../image/0000.jpg'); break;
+      }
   }
+
 })

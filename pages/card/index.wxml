@@ -6,9 +6,10 @@
 
     <view wx:if="{{cardType==1}}">
 		<view class="swiper">
-			<image class="bg" src="../../image/cardbg.jpg" />
 			<view class="Oneslide">
-		    	<image src="../../image/card1.jpg" />
+		    	<image src="../../image/6549.jpg" />
+		    	<p class="bala">余额 <span>{{eCard.bala}}</span></p>
+		    	<image class="avatar" src="{{userInfo.avatarUrl||'../../image/avatar.jpg'}}" />
 		    	<view class="cardNo">{{eCard.cardNo}}</view>
 			</view>
 		</view>
@@ -18,19 +19,19 @@
 			<view class="flex-item btn" bindtap="openCharge">账户充值</view>
 			<view class="flex-item btn" bindtap="openTrade">消费明细</view>
 		</view>
-		<image class="scanIcon" src="../../image/scan.png" />
+		<image bindtap="openAccount" class="scanIcon" src="../../image/scan.png" />
     </view>
 
 
     <view wx:if="{{cardType==2}}">
     	<view wx:if="{{entityCards.length != 0}}">
 			<view class="swiper">
-				<image class="bg" src="../../image/cardbg.jpg" />
-				<view class="swiperCon">
-					<view class="swiperGroup" animation="{{animationData}}" style="width:{{entityCards.length*560}}rpx">
+				<view class="swiperCon" bindtouchstart="touchStart" bindtouchend="touchEnd">
+					<view class="swiperGroup" animation="{{animationData}}" style="width:{{entityCards.length*615}}rpx;">
 					    <view class="slide" wx:key="{{index}}" wx:for="{{entityCards}}">
-					    	<image src="../../image/card1.jpg" />
-					    	<view class="cardNo">{{item.cardNo}}</view>
+					    	<image src="{{item.cardImg}}" />
+					    	<p class="bala c{{item.typeId}}">余额 <span>{{item.bala}}</span></p>
+					    	<view class="cardNo c{{item.typeId}}">{{item.cardNo}}</view>
 					    </view>
 					</view>
 				</view>
@@ -41,11 +42,11 @@
 		    	<image bindtap="nextClick" class="next" src="../../image/next.png" />
 			</view>
 			<view class="text">账户余额</view>
-			<view class="val">{{eCard.bala}}</view>
-			<view class="flexbox btnGroup">
+			<view class="val">{{entityCards[page].bala}}</view>
+			<view class="flexbox btnGroup oneBtn">
 				<view class="flex-item btn" bindtap="openTrade">消费明细</view>
 			</view>
-			<image class="scanIcon" src="../../image/scan.png" />
+			<image bindtap="openAccount" class="scanIcon" src="../../image/scan.png" />
 		</view>
 		<view class="empty" wx:if="{{entityCards == 0}}">
 			<image src="../../image/empty.png" />

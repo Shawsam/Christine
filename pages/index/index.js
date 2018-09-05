@@ -4,13 +4,18 @@ const app = getApp()
 
 Page({
   onLoad: function (option) {
+    wx.getUserInfo({
+      success: res => {
+        app.globalData.userInfo = res.userInfo
+      }
+    }) 
+
     var _this = this,
         userInfo = app.globalData.userInfo,
         userId = app.globalData.userId,
         openId = app.globalData.openId
-    
 
-    wx.showLoading({title:'加载中'})
+    // wx.showLoading({title:'加载中'})
     if (!userId){
       wx.reLaunch({url:'../login/index'})
       return
@@ -30,14 +35,20 @@ Page({
         success: function (res) {
             //服务器返回的结果
             console.log(res);
-            wx.hideLoading()
+            //wx.hideLoading()
             if (res.data.errcode == 0) {
-                _this.setData({info:res.data,
+                var info = res.data
+                info.bala = info.bala.toFixed(2)
+                _this.setData({info:info,
                                userInfo:userInfo})
                 app.globalData.mobile = res.data.mobile    //手机号当做全局变量
+                app.globalData.cardNo = res.data.cardNo
             }
         }
     })
+  },
+  openTrade:function(){
+     wx.navigateTo({url:'../tradelist/index'})
   },
   openAccount:function(){
     wx.navigateTo({url:'../account/index'})
@@ -53,5 +64,14 @@ Page({
   },
   TobindCard:function(){
     wx.navigateTo({url:'../bindcard/index'})
+  },
+  openUserinfo:function(){
+    wx.navigateTo({url:'../userinfo/index'})
+  },
+  openDev:function(){
+    wx.navigateTo({url:'../dev/index'})
+  },
+  onShow:function(){
+    this.onLoad()
   }
 })

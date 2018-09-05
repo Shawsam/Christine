@@ -10,13 +10,13 @@ Page({
   },
   onLoad: function (option) {
      var time = formatTime(1000*option.date),
-         fee = formatTime(option.fee);
+         fee = option.fee;
      this.setData({
      	time:time,
      	fee:fee
      })
   },
   backTap:function(){
-     wx.navigateBack()
+     wx.switchTab({url:'../index/index'})
   }
 })

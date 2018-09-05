@@ -1,5 +1,5 @@
-<view class="container">
-    <view class="item" wx:for="{{transLogList}}" wx:key="{{index}}">
+<scroll-view scroll-y class="container" bindscrolltolower="loadMoreData" bindscrolltoupper="refreshData">
+    <view wx:if="{{transLogList.length}}" class="item" wx:for="{{transLogList}}" wx:key="{{index}}">
         <view class="timeCon">
             <view>{{item.transDate}}</view>
             <view>{{item.transTime}}</view>
@@ -11,6 +11,11 @@
             <view class="val">{{item.transCode=='A001'?'-':'+'}}{{item.transAmt}}</view>
             <view class="addr">{{item.shopName}}</view>
         </view>
-        <view class="type">{{item.transCode=='A001'?'消费':'充值'}}</view>
+        <view class="type {{item.transCode=='A001'?'':'charge'}}">{{item.transCode=='A001'?'消费':'充值'}}</view>
     </view>
-</view>
+    <view class="empty" wx:if="{{transLogList.length==0}}">
+        <image src="../../image/empty.png" />
+        <view>暂无交易记录</view>
+    </view>
+    <view class="noMore" wx:if="{{noMore}}">没有更多数据了</view>
+</scroll-view>
